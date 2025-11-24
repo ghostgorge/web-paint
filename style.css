@@ -1,0 +1,257 @@
+:root {
+    --bg-color: #1a1a1a;
+    --sidebar-bg: #252525;
+    --text-color: #e0e0e0;
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+    --border-color: #333;
+    --canvas-bg: #ffffff;
+    --tool-bg: #333;
+    --tool-hover: #404040;
+    --tool-active: #3b82f6;
+    --danger-color: #ef4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    height: 100%;
+}
+
+/* Toolbar Styles */
+.toolbar {
+    width: 280px;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 2rem;
+    overflow-y: auto;
+}
+
+.brand h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    letter-spacing: -0.5px;
+}
+
+.tool-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.tool-section label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    font-weight: 500;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+.tool-btn {
+    aspect-ratio: 1;
+    background-color: var(--tool-bg);
+    border: none;
+    border-radius: 8px;
+    color: #aaa;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.tool-btn:hover {
+    background-color: var(--tool-hover);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.tool-btn.active {
+    background-color: var(--tool-active);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+}
+
+.tool-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Options */
+.option-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.option-group span {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+input[type="range"] {
+    width: 60%;
+    accent-color: var(--accent-color);
+}
+
+.color-picker-wrapper {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #fff;
+}
+
+input[type="color"] {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    cursor: pointer;
+    padding: 0;
+    border: none;
+}
+
+.colors-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.color-option {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s;
+}
+
+.color-option:hover {
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+/* Actions */
+.actions {
+    margin-top: auto;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background-color: var(--tool-bg);
+    border: none;
+    border-radius: 8px;
+    color: #e0e0e0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.action-btn:hover {
+    background-color: var(--tool-hover);
+}
+
+.action-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.action-btn.primary {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.action-btn.primary:hover {
+    background-color: var(--accent-hover);
+}
+
+/* Canvas Area */
+.canvas-area {
+    flex: 1;
+    background-color: #121212;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    overflow: auto;
+    background-image: radial-gradient(#333 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.canvas-container {
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    background-color: var(--canvas-bg);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    cursor: crosshair;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .toolbar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        padding: 1rem;
+        gap: 1rem;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .brand {
+        display: none;
+    }
+
+    .tool-section {
+        min-width: max-content;
+    }
+
+    .actions {
+        margin-top: 0;
+        flex-direction: row;
+    }
+}

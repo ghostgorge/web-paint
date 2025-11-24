@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Paint</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <aside class="toolbar">
+            <div class="brand">
+                <h1>Paint</h1>
+            </div>
+
+            <div class="tool-section">
+                <label>Tools</label>
+                <div class="tools-grid">
+                    <button class="tool-btn active" data-tool="brush" title="Brush">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <path d="M15 3a5 5 0 0 1 5 5 0 0 1-5 5H15"></path>
+                        </svg>
+                    </button>
+                    <button class="tool-btn" data-tool="eraser" title="Eraser">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 20H7L3 16C2 15 2 13 3 12L13 2L22 11L20 20Z"></path>
+                            <path d="M17 17L7 7"></path>
+                        </svg>
+                    </button>
+                    <button class="tool-btn" data-tool="fill" title="Fill Bucket">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 11l-8-8-9 9 8 8 5-5 9-9z"></path>
+                            <path d="M22 22h-9"></path>
+                        </svg>
+                    </button>
+                    <button class="tool-btn" data-tool="text" title="Text">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 7V4h16v3"></path>
+                            <path d="M9 20h6"></path>
+                            <path d="M12 4v16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="tool-section">
+                <label>Shapes</label>
+                <div class="tools-grid">
+                    <button class="tool-btn" data-tool="rectangle" title="Rectangle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        </svg>
+                    </button>
+                    <button class="tool-btn" data-tool="circle" title="Circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                        </svg>
+                    </button>
+                    <button class="tool-btn" data-tool="triangle" title="Triangle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                            </path>
+                        </svg>
+                    </button>
+                    <button class="tool-btn" data-tool="line" title="Line">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="19" x2="19" y2="5"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="tool-section">
+                <label>Options</label>
+                <div class="option-group">
+                    <span>Size</span>
+                    <input type="range" id="size-slider" min="1" max="50" value="5">
+                </div>
+                <div class="option-group">
+                    <span>Color</span>
+                    <div class="color-picker-wrapper">
+                        <input type="color" id="color-picker" value="#000000">
+                        <div class="color-preview" id="color-preview"></div>
+                    </div>
+                </div>
+                <div class="colors-grid">
+                    <div class="color-option" style="background-color: #000000;" data-color="#000000"></div>
+                    <div class="color-option" style="background-color: #ffffff;" data-color="#ffffff"></div>
+                    <div class="color-option" style="background-color: #ff0000;" data-color="#ff0000"></div>
+                    <div class="color-option" style="background-color: #00ff00;" data-color="#00ff00"></div>
+                    <div class="color-option" style="background-color: #0000ff;" data-color="#0000ff"></div>
+                    <div class="color-option" style="background-color: #ffff00;" data-color="#ffff00"></div>
+                    <div class="color-option" style="background-color: #ff00ff;" data-color="#ff00ff"></div>
+                    <div class="color-option" style="background-color: #00ffff;" data-color="#00ffff"></div>
+                </div>
+            </div>
+
+            <div class="tool-section actions">
+                <button class="action-btn" id="undo-btn" title="Undo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 7v6h6"></path>
+                        <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path>
+                    </svg>
+                    Undo
+                </button>
+                <button class="action-btn" id="clear-btn" title="Clear Canvas">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18"></path>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                    Clear
+                </button>
+                <button class="action-btn primary" id="save-btn" title="Save Image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    Save
+                </button>
+            </div>
+        </aside>
+
+        <main class="canvas-area">
+            <div class="canvas-container">
+                <canvas id="drawing-canvas"></canvas>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
